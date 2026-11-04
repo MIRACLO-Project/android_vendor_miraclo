@@ -1,0 +1,12 @@
+frameworks/base
+packages/apps/Settings
+packages/apps/Launcher3
+device/xiaomi/marble
+vendor/miraclo
+build/release
+frameworks/native
+hardware/interfaces
+packages/apps/Dialer
+packages/apps/Gallery2
+packages/modules/Bluetooth
+packages/modules/Wifi

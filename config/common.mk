@@ -1,9 +1,9 @@
 #
-# SPDX-FileCopyrightText: MiraCLO
+# SPDX-FileCopyrightText: MIRACLO
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Common MiraCLO product configuration. Device products inherit this after
+# Common MIRACLO product configuration. Device products inherit this after
 # their own device.mk and set MIRACLO_BUILD to the device codename first.
 
 MIRACLO_BUILD ?= $(TARGET_DEVICE)
@@ -24,7 +24,7 @@ ifeq ($(WITH_GMS),true)
 $(call inherit-product-if-exists, vendor/miraclo/gapps/gapps.mk)
 endif
 
-# MiraCLO's own signing keys (vendor/miraclo-keys links to ~/.miraclo-certs on
+# MIRACLO's own signing keys (vendor/miraclo-keys links to ~/.miraclo-certs on
 # the build machine; never in git). Without them the build uses test keys.
 ifneq ($(wildcard vendor/miraclo-keys/releasekey.x509.pem),)
 PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/miraclo-keys/releasekey
@@ -41,12 +41,12 @@ PRODUCT_COPY_FILES += \
     vendor/miraclo/config/permissions/default-permissions-miraclo-gms.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-miraclo-gms.xml
 endif
 
-# Wallpaper & style (Android's picker), MiraCLO's stock wallpapers and the default wallpaper.
+# Wallpaper & style (Android's picker), MIRACLO's stock wallpapers and the default wallpaper.
 PRODUCT_PACKAGES += \
     ThemePicker \
     MiraCLOWallpapers \
     MiraCLOWallpaperOverlay
 
-# MiraCLO boot animation (Descent).
+# MIRACLO boot animation (Descent).
 PRODUCT_COPY_FILES += \
     vendor/miraclo/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip

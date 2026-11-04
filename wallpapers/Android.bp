@@ -1,9 +1,9 @@
 //
-// SPDX-FileCopyrightText: MiraCLO
+// SPDX-FileCopyrightText: MIRACLO
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// MiraCLO's stock wallpapers, listed in Wallpaper & style (partner customization).
+// MIRACLO's stock wallpapers, listed in Wallpaper & style (partner customization).
 android_app {
     name: "MiraCLOWallpapers",
     sdk_version: "current",

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: MiraCLO
+     SPDX-FileCopyrightText: MIRACLO
      SPDX-License-Identifier: Apache-2.0
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.miraclo.wallpapers">
 
-    <application android:label="MiraCLO" android:hasCode="false">
+    <application android:label="MIRACLO" android:hasCode="false">
         <!-- Wallpaper & style finds the stock wallpapers through this partner customization. -->
         <!-- Only ever looked up, never sent, so it needs no code. -->
         <receiver android:name=".PartnerReceiver" android:exported="true">
