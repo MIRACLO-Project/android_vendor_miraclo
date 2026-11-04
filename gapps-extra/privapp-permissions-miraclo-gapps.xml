@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: MiraCLO
+    SPDX-License-Identifier: Apache-2.0
+
+    Google Clock: under its own name it misses SCHEDULE_EXACT_ALARM in Google's list; installed
+    over an older AOSP Clock it keeps the AOSP name (com.android.deskclock), which no Google list
+    covers. Without these, system_server refuses to start.
+-->
+<permissions>
+    <privapp-permissions package="com.google.android.deskclock">
+        <permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    </privapp-permissions>
+    <privapp-permissions package="com.android.deskclock">
+        <permission name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS"/>
+        <permission name="android.permission.QUERY_USERS"/>
+        <permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
+        <permission name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"/>
+    </privapp-permissions>
+</permissions>

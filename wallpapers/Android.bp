@@ -1,0 +1,24 @@
+//
+// SPDX-FileCopyrightText: MiraCLO
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// MiraCLO's stock wallpapers, listed in Wallpaper & style (partner customization).
+android_app {
+    name: "MiraCLOWallpapers",
+    sdk_version: "current",
+    product_specific: true,
+    certificate: "platform",
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+    aaptflags: ["-0 .jpg"],
+}
+
+// The default wallpaper.
+runtime_resource_overlay {
+    name: "MiraCLOWallpaperOverlay",
+    resource_dirs: ["overlay/res"],
+    manifest: "overlay/AndroidManifest.xml",
+    product_specific: true,
+    sdk_version: "current",
+}

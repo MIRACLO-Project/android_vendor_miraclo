@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: MiraCLO
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Shown under "MiraCLO" in Wallpaper & style. Each entry has a "_small" thumbnail. -->
+    <string-array name="partner_wallpapers" translatable="false">
+        <item>miraclo_orbit</item>
+        <item>miraclo_deep</item>
+        <item>miraclo_signal</item>
+        <item>miraclo_twilight</item>
+        <item>miraclo_cloud</item>
+        <item>miraclo_halo</item>
+        <item>miraclo_ice</item>
+        <item>miraclo_daybreak</item>
+    </string-array>
+</resources>

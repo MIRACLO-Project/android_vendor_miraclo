@@ -1,0 +1,12 @@
+//
+// SPDX-FileCopyrightText: MiraCLO
+// SPDX-License-Identifier: Apache-2.0
+//
+
+prebuilt_etc {
+    name: "privapp-permissions-miraclo-gapps",
+    src: "privapp-permissions-miraclo-gapps.xml",
+    filename: "privapp-permissions-miraclo-gapps.xml",
+    sub_dir: "permissions",
+    product_specific: true,
+}

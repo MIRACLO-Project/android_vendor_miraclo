@@ -1,0 +1,5 @@
+gapps/proprietary/
+gapps/.work/
+gapps/Android.bp
+gapps/gapps.mk
+gapps/overlay/

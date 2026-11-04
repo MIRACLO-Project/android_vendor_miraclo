@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: MiraCLO
+     SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.miraclo.wallpapers">
+
+    <application android:label="MiraCLO" android:hasCode="false">
+        <!-- Wallpaper & style finds the stock wallpapers through this partner customization. -->
+        <!-- Only ever looked up, never sent, so it needs no code. -->
+        <receiver android:name=".PartnerReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.launcher3.action.PARTNER_CUSTOMIZATION" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
