@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: MIRACLO
+     SPDX-License-Identifier: Apache-2.0 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M30,0H78A30,30 0 0 1 108,30V78A30,30 0 0 1 78,108H30A30,30 0 0 1 0,78V30A30,30 0 0 1 30,0Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="20" android:startY="0" android:endX="88" android:endY="108"
+                android:startColor="#FF6FA0FF" android:endColor="#FF3550C8" />
+        </aapt:attr>
+    </path>
+    <group android:scaleX="2.6" android:scaleY="2.6" android:translateX="22.8" android:translateY="22.8">
+        <path android:pathData="M8.5,9a3.5,3.5 0 1,0 7.0,0a3.5,3.5 0 1,0 -7.0,0" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" />
+        <path android:pathData="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    </group>
+</vector>

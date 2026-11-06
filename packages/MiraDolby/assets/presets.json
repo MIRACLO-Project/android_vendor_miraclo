@@ -1,0 +1,292 @@
+{
+ "source": "https://github.com/JackHack96/EasyEffects-Presets",
+ "presets": [
+  {
+   "name": "Perfect EQ",
+   "desc": "Warm lows and clear highs, with a slightly softer midrange",
+   "tags": [
+    "EQ"
+   ],
+   "close": false,
+   "eq": [
+    4.0,
+    2.0,
+    1.0,
+    0.0,
+    -1.0,
+    -2.0,
+    0.0,
+    2.0,
+    3.0,
+    3.0
+   ],
+   "fx": {
+    "virt": false,
+    "de": false,
+    "lev": false,
+    "bassEnh": false,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0
+   },
+   "source": "Perfect EQ.json"
+  },
+  {
+   "name": "Dolby Atmos",
+   "desc": "Wide and immersive, with depth and air",
+   "tags": [
+    "EQ",
+    "Bass",
+    "Width",
+    "Space"
+   ],
+   "close": true,
+   "eq": [
+    4.5,
+    3.8,
+    2.2,
+    -1.5,
+    -0.8,
+    1.0,
+    2.0,
+    2.8,
+    3.5,
+    4.0
+   ],
+   "fx": {
+    "virt": true,
+    "de": false,
+    "lev": false,
+    "bassEnh": true,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0,
+    "width": 80
+   },
+   "source": "Dolby Atmos.json"
+  },
+  {
+   "name": "Bass Enhancing + Perfect EQ",
+   "desc": "Perfect EQ with fuller bass and surround",
+   "tags": [
+    "EQ",
+    "Bass",
+    "Surround"
+   ],
+   "close": true,
+   "eq": [
+    4.0,
+    2.0,
+    1.0,
+    0.0,
+    -1.0,
+    -2.0,
+    0.0,
+    2.0,
+    3.0,
+    3.0
+   ],
+   "fx": {
+    "virt": true,
+    "de": false,
+    "lev": false,
+    "bassEnh": true,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0
+   },
+   "source": "Bass Enhancing + Perfect EQ.json"
+  },
+  {
+   "name": "Bass Enhancing + Perfect EQ - Low Latency",
+   "desc": "The low-latency version of Bass Enhancing + Perfect EQ",
+   "tags": [
+    "EQ",
+    "Bass",
+    "Surround"
+   ],
+   "close": true,
+   "eq": [
+    4.0,
+    2.0,
+    1.0,
+    0.0,
+    -1.0,
+    -2.0,
+    0.0,
+    2.0,
+    3.0,
+    3.0
+   ],
+   "fx": {
+    "virt": true,
+    "de": false,
+    "lev": false,
+    "bassEnh": true,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0
+   },
+   "source": "Bass Enhancing + Perfect EQ - Low Latency.json"
+  },
+  {
+   "name": "Boosted",
+   "desc": "Punchy lows and bright highs for music and films",
+   "tags": [
+    "EQ"
+   ],
+   "close": false,
+   "eq": [
+    5.0,
+    5.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    2.0,
+    4.0,
+    3.0,
+    2.0
+   ],
+   "fx": {
+    "virt": false,
+    "de": false,
+    "lev": false,
+    "bassEnh": false,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0
+   },
+   "source": "Boosted.json"
+  },
+  {
+   "name": "Bass Boosted",
+   "desc": "Perfect EQ with heavy bass, surround and extra loudness",
+   "tags": [
+    "EQ",
+    "Bass",
+    "Surround",
+    "Loudness"
+   ],
+   "close": true,
+   "eq": [
+    4.0,
+    2.0,
+    1.0,
+    0.0,
+    -1.0,
+    -2.0,
+    0.0,
+    2.0,
+    3.0,
+    3.0
+   ],
+   "fx": {
+    "virt": true,
+    "de": false,
+    "lev": true,
+    "bassEnh": true,
+    "bass": 3.0,
+    "treble": 0.0,
+    "ieq": 0
+   },
+   "source": "Bass Boosted.json"
+  },
+  {
+   "name": "Loudness+Autogain",
+   "desc": "Steady volume with a warmer, fuller sound",
+   "tags": [
+    "EQ",
+    "Loudness"
+   ],
+   "close": true,
+   "eq": [
+    0.0,
+    0.5,
+    4.5,
+    5.0,
+    0.5,
+    -3.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "fx": {
+    "virt": false,
+    "de": false,
+    "lev": true,
+    "bassEnh": false,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0,
+    "width": 35
+   },
+   "source": "Loudness+Autogain.json"
+  },
+  {
+   "name": "Advanced Auto Gain",
+   "desc": "Steady volume with a fuller sound and extra sparkle",
+   "tags": [
+    "EQ",
+    "Loudness",
+    "Treble"
+   ],
+   "close": true,
+   "eq": [
+    0.0,
+    0.5,
+    4.5,
+    5.0,
+    0.5,
+    -3.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "fx": {
+    "virt": false,
+    "de": false,
+    "lev": true,
+    "bassEnh": false,
+    "bass": 0.0,
+    "treble": 1.5,
+    "ieq": 0
+   },
+   "source": "Advanced Auto Gain.json"
+  },
+  {
+   "name": "Speaker Sync",
+   "desc": "A light, natural tune with crossfeed for relaxed listening",
+   "tags": [
+    "EQ",
+    "Width"
+   ],
+   "close": true,
+   "eq": [
+    -2.5,
+    0.0,
+    0.5,
+    -0.5,
+    0.0,
+    0.5,
+    0.0,
+    0.5,
+    0.0,
+    -1.0
+   ],
+   "fx": {
+    "virt": false,
+    "de": false,
+    "lev": false,
+    "bassEnh": false,
+    "bass": 0.0,
+    "treble": 0.0,
+    "ieq": 0,
+    "width": 35
+   },
+   "source": "Speaker Sync.json"
+  }
+ ]
+}

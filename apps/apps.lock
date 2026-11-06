@@ -1,0 +1,89 @@
+{
+ "MiraAves": {
+  "cert": "f4794727e45416d87c487138292b709f11d1cd7dab5584d8c6857d92e066604b",
+  "jni": [],
+  "sha256": "5eaccf1c6a5ec2152f8f033a6a4f4db8626a1374a70d0aef266a83103ade17c0",
+  "url": "https://github.com/deckerst/aves/releases/download/v1.15.8/app-libre-arm64-v8a-release.apk",
+  "version": "v1.15.8"
+ },
+ "MiraCromite": {
+  "cert": "633fa41d8211d6d0916a819b89668c6de92e64232da67f9d16fd81c3b7e923ff",
+  "jni": [],
+  "sha256": "9db12af1af021f42b4371e76d0e9fe476a7085bbbbc76bc410a538d028bf6071",
+  "url": "https://github.com/uazo/cromite/releases/download/v153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a/arm64_ChromePublic.apk",
+  "version": "v153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a"
+ },
+ "MiraFossifyCalculator": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "7c5443c22d6d62c67dfe80df33ea9161ff0fa440f92590bcb45d7008b57613ed",
+  "url": "https://github.com/FossifyOrg/Calculator/releases/download/1.4.0/calculator-10-foss-release.apk",
+  "version": "1.4.0"
+ },
+ "MiraFossifyCalendar": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "d43b2df05d5702bea760a7ab03402977ba72e446e5932038efbdab248a5de987",
+  "url": "https://github.com/FossifyOrg/Calendar/releases/download/1.12.0/calendar-23-foss-release.apk",
+  "version": "1.12.0"
+ },
+ "MiraFossifyClock": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "43cf9f0ec45f1f1ff2df47286622e5b8f3acedaeb07b7f7641b5243dbedca079",
+  "url": "https://github.com/FossifyOrg/Clock/releases/download/1.6.0/clock-10-foss-release.apk",
+  "version": "1.6.0"
+ },
+ "MiraFossifyContacts": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "6a89be96b5ec39f5e2b11bd61dc7031f4b88261b324ab13af5743fbc62f0cddb",
+  "url": "https://github.com/FossifyOrg/Contacts/releases/download/1.6.0/contacts-13-foss-release.apk",
+  "version": "1.6.0"
+ },
+ "MiraFossifyFileManager": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "9ba65c2ab8ca612fd90d8eba5320572ed1e1f99f2c6139244c7e05ef9a377d36",
+  "url": "https://github.com/FossifyOrg/File-Manager/releases/download/1.6.3/file-manager-15-foss-release.apk",
+  "version": "1.6.3"
+ },
+ "MiraFossifyMessages": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "7077dae6613d7a9d775841c4c10be16e255f8af8d5152bc84a5e6984740b56e1",
+  "url": "https://github.com/FossifyOrg/Messages/releases/download/1.10.2/messages-26-foss-release.apk",
+  "version": "1.10.2"
+ },
+ "MiraFossifyPhone": {
+  "cert": "affdb124d3f4720c2f98dbca9eacba0514fba4306e20a2786c861c3c0d6ff292",
+  "jni": [],
+  "sha256": "d1ad08467034e5138a6e68f03b6e150f0bb010dfcbf490ff3d2bd4822b755728",
+  "url": "https://github.com/FossifyOrg/Phone/releases/download/1.11.1/phone-22-foss-release.apk",
+  "version": "1.11.1"
+ },
+ "MiraGramophone": {
+  "cert": "f451197ad7b80bd1bc981ba38a2c49d471856fb38bcc333676d6e8f8f3ce5d6e",
+  "jni": [],
+  "sha256": "fe36158a4ba3829f74aa43c50f3048c26f0a9e15635460b9d823cf01dbff034c",
+  "url": "https://github.com/FoedusProgramme/Gramophone/releases/download/1.1.2/Gramophone-1.1.2-release.apk",
+  "version": "1.1.2"
+ },
+ "MiraHeliBoard": {
+  "cert": "5ec0a5313aa43558ee75b20b58ccd8194cdbf066df94a43ba288d933d60b86ce",
+  "jni": [
+   "lib/arm64-v8a/libandroidx.graphics.path.so",
+   "lib/arm64-v8a/libjni_latinime.so"
+  ],
+  "sha256": "69b2b2fb349934371b1ed2d3569541cc0bda987f8aaf5eb5f5b157961f76de86",
+  "url": "https://github.com/HeliBorg/HeliBoard/releases/download/v4.2/HeliBoard_4.2-release.apk",
+  "version": "v4.2"
+ },
+ "MiraOpenCamera": {
+  "cert": "ff4b85f5037ab16f535ae5a1272697abcfd96f0faa0e0c7ac37b2ed5c894e588",
+  "jni": [],
+  "sha256": "d1da901cd4adfaad8f70f389b06972b46ebb7b988e8a0912c2e661422736455f",
+  "url": "https://sourceforge.net/projects/opencamera/files/v_1_56_2/OpenCamera.apk/download",
+  "version": "1.56.2"
+ }
+}

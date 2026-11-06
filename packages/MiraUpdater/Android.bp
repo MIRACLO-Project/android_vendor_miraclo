@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Mira Updater: checks for a new MIRACLO version, installs it in the background with
+// update_engine (A/B, the phone stays usable) and asks for a restart.
+android_app {
+    name: "MiraUpdater",
+    srcs: ["src/**/*.java"],
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+    platform_apis: true,
+}

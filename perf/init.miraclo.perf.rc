@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: MIRACLO
+# SPDX-License-Identifier: Apache-2.0
+#
+# MIRACLO smoothness tuning, applied once the phone has started (so the stock vendor's own
+# settings are in place first). The ideas are the ones phone makers use; the values are ours.
+
+on property:sys.boot_completed=1
+    # The app on screen and its rendering threads never wait for a slow CPU: a small
+    # guaranteed minimum for the top app, and nothing from the background can borrow the top.
+    write /dev/cpuctl/top-app/cpu.uclamp.min 10
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+    write /dev/cpuctl/background/cpu.uclamp.max 50
+    write /dev/cpuctl/system-background/cpu.uclamp.max 50
+
+    # Memory: compressed swap (zram) answers faster without read-around, and the kernel keeps
+    # app memory in RAM a little longer before reclaiming file cache.
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 80
+    write /proc/sys/vm/dirty_ratio 20
+    write /proc/sys/vm/dirty_background_ratio 5
+
+    # Storage (UFS): no entropy work and no I/O statistics on every request; finish requests on
+    # the CPU that sent them.
+    write /sys/block/sda/queue/iostats 0
+    write /sys/block/sda/queue/add_random 0
+    write /sys/block/sda/queue/rq_affinity 2
+    write /sys/block/sdc/queue/iostats 0
+    write /sys/block/sdc/queue/add_random 0
+    write /sys/block/sdc/queue/rq_affinity 2
+    write /sys/block/dm-0/queue/iostats 0
+
+    # Less time spent on kernel performance sampling.
+    write /proc/sys/kernel/perf_cpu_time_max_percent 5

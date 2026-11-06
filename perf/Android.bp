@@ -1,0 +1,11 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Bridge from com.qualcomm.qti.Performance (frameworks/base) to Qualcomm's perf client.
+cc_library_shared {
+    name: "libmiraperf_jni",
+    srcs: ["miraperf_jni.cpp"],
+    header_libs: ["jni_headers"],
+    shared_libs: ["libdl"],
+    cflags: ["-Wall", "-Werror"],
+}

@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Mira lock, unlock and charging sounds as Android's defaults (set on first boot).
+runtime_resource_overlay {
+    name: "MiraSoundsOverlay",
+    product_specific: true,
+}

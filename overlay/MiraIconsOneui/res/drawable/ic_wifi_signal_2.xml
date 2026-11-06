@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: MIRACLO
+     SPDX-License-Identifier: Apache-2.0 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path android:fillColor="@android:color/white" android:fillAlpha="1" android:pathData="M9.8,18.8A2.2,2.2 0 1 1 14.2,18.8A2.2,2.2 0 1 1 9.8,18.8Z" />
+    <path android:strokeColor="@android:color/white" android:strokeAlpha="1" android:strokeWidth="2.8" android:strokeLineCap="round" android:pathData="M7.56,15.07A5.8,5.8 0 0 1 16.44,15.07" />
+    <path android:strokeColor="@android:color/white" android:strokeAlpha="0.3" android:strokeWidth="2.8" android:strokeLineCap="round" android:pathData="M4.65,12.63A9.6,9.6 0 0 1 19.35,12.63" />
+    <path android:strokeColor="@android:color/white" android:strokeAlpha="0.3" android:strokeWidth="2.8" android:strokeLineCap="round" android:pathData="M1.74,10.19A13.4,13.4 0 0 1 22.26,10.19" />
+</vector>

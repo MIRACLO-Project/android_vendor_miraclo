@@ -47,6 +47,63 @@ PRODUCT_PACKAGES += \
     MiraCLOWallpapers \
     MiraCLOWallpaperOverlay
 
-# MIRACLO boot animation (Descent).
+# MIRACLO boot animation: the light falls, draws the O and circles it while the phone starts.
 PRODUCT_COPY_FILES += \
-    vendor/miraclo/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+    vendor/miraclo/bootanimation/bootanimation-orbit.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
+
+# Mira Sans (Inter, SIL Open Font License 1.1): the system theme font.
+PRODUCT_COPY_FILES += \
+    vendor/miraclo/fonts/MiraSans-Variable.ttf:$(TARGET_COPY_OUT_PRODUCT)/fonts/MiraSans-Variable.ttf \
+    vendor/miraclo/fonts/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
+PRODUCT_PACKAGES += \
+    MiraSansOverlay
+
+# Mira sounds: notification, ringtone, alarm, lock, unlock and charging (our own recordings).
+PRODUCT_COPY_FILES += \
+    vendor/miraclo/sounds/MiraDrop.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/MiraDrop.ogg \
+    vendor/miraclo/sounds/MiraAurora.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/MiraAurora.ogg \
+    vendor/miraclo/sounds/MiraDawn.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/alarms/MiraDawn.ogg \
+    vendor/miraclo/sounds/MiraLock.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/MiraLock.ogg \
+    vendor/miraclo/sounds/MiraGlass.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/MiraGlass.ogg \
+    vendor/miraclo/sounds/MiraRise.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/MiraRise.ogg
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.notification_sound=MiraDrop.ogg \
+    ro.config.ringtone=MiraAurora.ogg \
+    ro.config.alarm_alert=MiraDawn.ogg
+PRODUCT_PACKAGES += \
+    MiraSoundsOverlay
+
+# Mira system app icons (an icon pack the launcher uses by default).
+PRODUCT_PACKAGES += \
+    MiraSystemIcons
+
+# Mira Updater: over-the-air updates installed in the background (A/B).
+PRODUCT_PACKAGES += \
+    MiraUpdater
+PRODUCT_COPY_FILES += \
+    vendor/miraclo/packages/MiraUpdater/privapp-permissions-miraclo-updater.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-miraclo-updater.xml
+
+# Mira Setup: MIRACLO's own first screens, before Google's (or Android's) setup.
+PRODUCT_PACKAGES += \
+    MiraSetup
+PRODUCT_COPY_FILES += \
+    vendor/miraclo/packages/MiraSetup/privapp-permissions-miraclo-setup.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-miraclo-setup.xml
+
+# Status bar icon styles (Mira Studio › Status bar): Wi-Fi and mobile signal.
+PRODUCT_PACKAGES += \
+    MiraIconsColoros \
+    MiraIconsIos \
+    MiraIconsOneui
+
+# Mira Dolby: the phone's Dolby Atmos engine, with the EasyEffects presets, per-app profiles
+# and a Quick Settings tile.
+PRODUCT_PACKAGES += \
+    MiraDolby
+PRODUCT_COPY_FILES += \
+    vendor/miraclo/packages/MiraDolby/privapp-permissions-miraclo-dolby.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-miraclo-dolby.xml
+
+# Open-source apps in place of Android's old AOSP apps (vendor/miraclo/apps/apps.mk). They are
+# arm64 builds, so the emulator keeps the AOSP apps.
+ifneq ($(MIRACLO_BUILD),emu)
+$(call inherit-product, vendor/miraclo/apps/apps.mk)
+endif

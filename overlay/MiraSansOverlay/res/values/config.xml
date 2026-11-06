@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: MIRACLO
+     SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="config_bodyFontFamily" translatable="false">mira-sans</string>
+    <string name="config_bodyFontFamilyMedium" translatable="false">mira-sans-medium</string>
+    <string name="config_headlineFontFamily" translatable="false">mira-sans</string>
+    <string name="config_headlineFontFamilyMedium" translatable="false">mira-sans-medium</string>
+</resources>

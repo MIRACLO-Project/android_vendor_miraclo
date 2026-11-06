@@ -1,0 +1,14 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Mira Setup: MIRACLO's own first screens (Hello, then your look). When done it switches itself
+// off and Android continues with Google's setup (Wi-Fi, account, restore) or, without Google
+// apps, Android's own.
+android_app {
+    name: "MiraSetup",
+    srcs: ["src/**/*.java"],
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+    sdk_version: "current",
+}

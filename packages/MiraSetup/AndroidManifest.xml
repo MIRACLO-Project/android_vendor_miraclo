@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: MIRACLO
+     SPDX-License-Identifier: Apache-2.0 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.miraclo.setup">
+
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_DAY_NIGHT_MODE" />
+
+    <application
+        android:label="Mira Setup"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+        android:directBootAware="true">
+        <!-- Above Google's setup and Android's Provision while setup is not complete. -->
+        <activity
+            android:name=".MiraSetupActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:immersive="true"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// ColorOS-style Wi-Fi and mobile signal icons for the status bar (our own drawings).
+runtime_resource_overlay {
+    name: "MiraIconsColoros",
+    product_specific: true,
+}

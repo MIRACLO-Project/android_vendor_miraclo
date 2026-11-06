@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-FileCopyrightText: MIRACLO
+     SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="def_lock_sound" translatable="false">/product/media/audio/ui/MiraLock.ogg</string>
+    <string name="def_unlock_sound" translatable="false">/product/media/audio/ui/MiraGlass.ogg</string>
+    <string name="def_trusted_sound" translatable="false">/product/media/audio/ui/MiraGlass.ogg</string>
+    <string name="def_wireless_charging_started_sound" translatable="false">/product/media/audio/ui/MiraRise.ogg</string>
+    <string name="def_charging_started_sound" translatable="false">/product/media/audio/ui/MiraRise.ogg</string>
+</resources>

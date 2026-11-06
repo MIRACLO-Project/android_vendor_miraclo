@@ -3,3 +3,10 @@ gapps/.work/
 gapps/Android.bp
 gapps/gapps.mk
 gapps/overlay/
+gapps/mtg/
+gapps/pkgmap.txt
+gapps/skipped.txt
+gapps/privapp-permissions-miraclo-gapps-generated-*.xml
+apps/prebuilt/
+__pycache__/
+*.pyc

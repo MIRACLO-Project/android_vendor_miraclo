@@ -34,7 +34,7 @@ for t in aapt2 simg2img fsck.erofs; do
     [ -x "${HOST}/${t}" ] || { echo "Host tool missing: m aapt2 simg2img fsck.erofs" >&2; exit 1; }
 done
 
-rm -rf "${WORK}" "${OUT}" "${GAPPS}/skipped.txt"
+rm -rf "${WORK}" "${OUT}" "${GAPPS}/skipped.txt" "${GAPPS}/pkgmap.txt"
 mkdir -p "${WORK}" "${OUT}"
 
 if [ -f "${SRC}" ]; then
@@ -211,6 +211,7 @@ for part in gmsapex product system_ext system; do
             } >> "${BP}"
             echo "    ${name} \\" >> "${MK}"
             echo "  ${pkg} -> ${name}"
+            echo "${pkg} ${name}" >> "${GAPPS}/pkgmap.txt"
             GOT[${pkg}]=1
             found=$((found + 1))
         done

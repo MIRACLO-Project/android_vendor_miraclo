@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// iOS-style Wi-Fi and mobile signal icons for the status bar (our own drawings).
+runtime_resource_overlay {
+    name: "MiraIconsIos",
+    product_specific: true,
+}

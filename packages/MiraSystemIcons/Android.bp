@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Mira system app icons: an icon pack (appfilter) the MIRACLO launcher uses by default.
+android_app {
+    name: "MiraSystemIcons",
+    product_specific: true,
+    sdk_version: "current",
+    certificate: "platform",
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+    srcs: ["src/**/*.java"],
+}
