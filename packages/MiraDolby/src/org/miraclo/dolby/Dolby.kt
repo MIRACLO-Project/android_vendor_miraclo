@@ -130,6 +130,15 @@ object Dolby {
         changed()
     }
 
+    /** No preset: the profile plays with its own values. */
+    fun clearPreset() {
+        presetKey = null
+        val ed = prefs.edit().remove("preset")
+        if (kind == Kind.CUSTOM) { stored.remove(Kind.CUSTOM); ed.remove("tune_" + Kind.CUSTOM.name) }
+        ed.apply()
+        changed()
+    }
+
     /** Changes the current profile's values. */
     fun edit(change: (Tune) -> Tune) {
         val t = change(tune())

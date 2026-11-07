@@ -38,13 +38,32 @@ class HomePage(a: MainActivity) : Page(a) {
     private val presetName = ellipsize(a.text("", 16f, p.fg, 600))
     private val badge = CurveBadge(a, p)
     private val outputs = ArrayList<TextView>()
+    private val tabs = ArrayList<TextView>()
     private val cards = HashMap<Kind, Pair<LinearLayout, Pair<PathIcon, TextView>>>()
     private val surround = SliderRow(a, p, "Surround")
     private val dialogue = SliderRow(a, p, "Dialogue")
     private val bass = SliderRow(a, p, "Bass")
+    private val pager = SwipePager(a)
 
-    override val view: View = a.scroller(a.column(12).apply {
-        // Title, and About.
+    /** Speaker or headphones: shown on both pages, both stay in step. */
+    private fun outputSwitch(): LinearLayout {
+        val seg = a.row(6)
+        seg.setPadding(a.dp(4), a.dp(4), a.dp(4), a.dp(4))
+        seg.background = rounded(p.card, a.dp(22f))
+        for ((i, name) in listOf("Speaker", "Headphones").withIndex()) {
+            val b = a.text(name, 14f, p.fg, 600)
+            b.gravity = Gravity.CENTER
+            b.setOnClickListener { a.viewHeadphones = i == 1; bind() }
+            outputs.add(b)
+            seg.addView(b, lp(0, a.dp(38), 1f))
+        }
+        return seg
+    }
+
+    override val view: View = a.column().apply {
+        // Title and About, then the two tabs: Sound (presets and profiles) and Tuning.
+        val head = a.column(10)
+        head.setPadding(a.dp(16), 0, a.dp(16), a.dp(8))
         val top = a.row()
         top.setPadding(a.dp(4), a.dp(6), a.dp(4), 0)
         val names = a.column(2)
@@ -58,111 +77,141 @@ class HomePage(a: MainActivity) : Page(a) {
             FrameLayout.LayoutParams(WRAP, WRAP, Gravity.CENTER))
         about.setOnClickListener { a.open(AboutPage(a)) }
         top.addView(about, lp(a.dp(44), a.dp(44)))
-        addView(top)
-
-        // The hero: logo, Dolby Atmos switch.
-        val hero = FrameLayout(a)
-        hero.background = heroBackground(p, a.dp(28f))
-        hero.outlineProvider = object : ViewOutlineProvider() {
-            override fun getOutline(v: View, o: Outline) = o.setRoundRect(0, 0, v.width, v.height, a.dp(28f))
+        head.addView(top)
+        val tabRow = a.row(6)
+        tabRow.setPadding(a.dp(4), a.dp(4), a.dp(4), a.dp(4))
+        tabRow.background = rounded(p.card, a.dp(22f))
+        for ((i, name) in listOf("Sound", "Tuning").withIndex()) {
+            val t = a.text(name, 14f, p.fg, 600)
+            t.gravity = Gravity.CENTER
+            t.setOnClickListener { pager.show(i) }
+            tabs.add(t)
+            tabRow.addView(t, lp(0, a.dp(38), 1f))
         }
-        hero.clipToOutline = true
-        hero.addView(logo, FrameLayout.LayoutParams(MATCH, MATCH))
-        val bar = a.row()
-        bar.setPadding(a.dp(20), 0, a.dp(20), a.dp(16))
-        val t = a.column(2)
-        t.addView(a.text("Dolby Atmos", 18f, p.fg, 600))
-        t.addView(status)
-        bar.addView(t, lp(0, WRAP, 1f))
-        bar.addView(power)
-        power.contentDescription = "Dolby Atmos"
-        power.onChange = { Dolby.setEnabled(it) }
-        hero.addView(bar, FrameLayout.LayoutParams(MATCH, WRAP, Gravity.BOTTOM))
-        addView(hero, lp(MATCH, a.dp(196)))
+        head.addView(tabRow)
+        addView(head, lp())
 
-        // Sound preset.
-        val pc = a.row(14)
-        pc.setPadding(a.dp(12), a.dp(12), a.dp(16), a.dp(12))
-        pc.background = touch(p, rounded(p.card, a.dp(24f)), a.dp(24f))
-        pc.addView(badge)
-        val pn = a.column(2)
-        pn.addView(a.text("Sound preset", 12f, p.fg2))
-        pn.addView(presetName)
-        pc.addView(pn, lp(0, WRAP, 1f))
-        pc.addView(a.text("Change", 13f, p.link, 600))
-        pc.setOnClickListener { a.open(PresetsPage(a)) }
-        addView(pc)
-
-        // Speaker or headphones.
-        val seg = a.row(6)
-        seg.setPadding(a.dp(4), a.dp(4), a.dp(4), a.dp(4))
-        seg.background = rounded(p.card, a.dp(22f))
-        for ((i, name) in listOf("Speaker", "Headphones").withIndex()) {
-            val b = a.text(name, 14f, p.fg, 600)
-            b.gravity = Gravity.CENTER
-            b.setOnClickListener { a.viewHeadphones = i == 1; bind() }
-            outputs.add(b)
-            seg.addView(b, lp(0, a.dp(38), 1f))
-        }
-        addView(seg)
-
-        // Profiles.
-        addView(a.label("Profile"))
-        val grid = a.column(8)
-        Kind.values().toList().chunked(3).forEach { line ->
-            val r = a.row(8)
-            for (k in line) {
-                val c = a.column(5)
-                c.gravity = Gravity.CENTER
-                val icon = PathIcon(a, k.icon, p.fg2, 20)
-                val name = a.text(k.label, 13f, p.fg, 500)
-                c.addView(icon)
-                c.addView(name)
-                c.setOnClickListener { Dolby.selectKind(k) }
-                cards[k] = c to (icon to name)
-                r.addView(c, lp(0, a.dp(66), 1f))
+        // Page 1, Sound: Dolby Atmos, the preset, the output and the profiles.
+        val sound = a.column(12).apply {
+            val hero = FrameLayout(a)
+            hero.background = heroBackground(p, a.dp(28f))
+            hero.outlineProvider = object : ViewOutlineProvider() {
+                override fun getOutline(v: View, o: Outline) = o.setRoundRect(0, 0, v.width, v.height, a.dp(28f))
             }
-            grid.addView(r)
+            hero.clipToOutline = true
+            hero.addView(logo, FrameLayout.LayoutParams(MATCH, MATCH))
+            val bar = a.row()
+            bar.setPadding(a.dp(20), 0, a.dp(20), a.dp(16))
+            val t = a.column(2)
+            t.addView(a.text("Dolby Atmos", 18f, p.fg, 600))
+            t.addView(status)
+            bar.addView(t, lp(0, WRAP, 1f))
+            bar.addView(power)
+            power.contentDescription = "Dolby Atmos"
+            power.onChange = { Dolby.setEnabled(it) }
+            hero.addView(bar, FrameLayout.LayoutParams(MATCH, WRAP, Gravity.BOTTOM))
+            addView(hero, lp(MATCH, a.dp(180)))
+
+            val pc = a.row(14)
+            pc.setPadding(a.dp(12), a.dp(12), a.dp(16), a.dp(12))
+            pc.background = touch(p, rounded(p.card, a.dp(24f)), a.dp(24f))
+            pc.addView(badge)
+            val pn = a.column(2)
+            pn.addView(a.text("Sound preset", 12f, p.fg2))
+            pn.addView(presetName)
+            pc.addView(pn, lp(0, WRAP, 1f))
+            pc.addView(a.text("Change", 13f, p.link, 600))
+            pc.setOnClickListener { a.open(PresetsPage(a)) }
+            addView(pc)
+
+            addView(outputSwitch())
+
+            addView(a.label("Profile"))
+            val grid = a.column(8)
+            Kind.values().toList().chunked(3).forEach { line ->
+                val r = a.row(8)
+                for (k in line) {
+                    val c = a.column(6)
+                    c.gravity = Gravity.CENTER
+                    val icon = PathIcon(a, k.icon, p.fg2, 20)
+                    val name = a.text(k.label, 13f, p.fg, 500)
+                    name.gravity = Gravity.CENTER_HORIZONTAL
+                    name.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    c.addView(icon, lp(WRAP, WRAP).apply { gravity = Gravity.CENTER_HORIZONTAL })
+                    c.addView(name, lp(MATCH, WRAP))
+                    c.setOnClickListener { Dolby.selectKind(k) }
+                    cards[k] = c to (icon to name)
+                    r.addView(c, lp(0, a.dp(72), 1f))
+                }
+                grid.addView(r)
+            }
+            addView(grid)
+            addView(a.text("Swipe left for surround, dialogue, bass, the equalizer and effects.", 12f, p.fg2).apply {
+                gravity = Gravity.CENTER_HORIZONTAL; textAlignment = View.TEXT_ALIGNMENT_CENTER
+                setPadding(a.dp(8), a.dp(4), a.dp(8), 0)
+            }, lp())
         }
-        addView(grid)
 
-        // Quick sliders.
-        val sl = a.card(26f)
-        sl.setPadding(0, a.dp(6), 0, a.dp(8))
-        surround.slider.onChange = { f -> Dolby.edit { it.copy(width = (f * 100).roundToInt()) } }
-        surround.onReset { Dolby.edit { it.copy(width = Dolby.baseline().width) } }
-        dialogue.slider.onChange = { f -> Dolby.edit { it.copy(dialogueAmount = (f * 100).roundToInt(), dialogue = true) } }
-        dialogue.onReset { val b = Dolby.baseline(); Dolby.edit { it.copy(dialogueAmount = b.dialogueAmount, dialogue = b.dialogue) } }
-        bass.slider.steps = ((Tune.TONE_MAX - Tune.TONE_MIN) * 2).toInt()
-        bass.slider.onChange = { f -> Dolby.edit { it.copy(bass = toneOf(f)) } }
-        bass.onReset { Dolby.edit { it.copy(bass = Dolby.baseline().bass) } }
-        sl.addView(surround); sl.addView(dialogue); sl.addView(bass)
-        addView(sl)
+        // Page 2, Tuning: the sliders, the equalizer, effects, per-app, and reset.
+        val tuning = a.column(12).apply {
+            addView(outputSwitch())
+            val sl = a.card(26f)
+            sl.setPadding(0, a.dp(6), 0, a.dp(8))
+            surround.slider.onChange = { f -> Dolby.edit { it.copy(width = (f * 100).roundToInt()) } }
+            surround.onReset { Dolby.edit { it.copy(width = Dolby.baseline().width) } }
+            dialogue.slider.onChange = { f ->
+                val amount = (f * 100).roundToInt()
+                Dolby.edit { it.copy(dialogueAmount = amount, dialogue = amount > 0) }
+            }
+            dialogue.onReset { val b = Dolby.baseline(); Dolby.edit { it.copy(dialogueAmount = b.dialogueAmount, dialogue = b.dialogue) } }
+            bass.slider.steps = ((Tune.TONE_MAX - Tune.TONE_MIN) * 2).toInt()
+            bass.slider.onChange = { f -> Dolby.edit { it.copy(bass = toneOf(f)) } }
+            bass.onReset { Dolby.edit { it.copy(bass = Dolby.baseline().bass) } }
+            sl.addView(surround); sl.addView(dialogue); sl.addView(bass)
+            addView(sl)
 
-        // More pages.
-        val nav = a.row()
-        nav.background = rounded(p.card, a.dp(26f))
-        nav.clipToOutline = true
-        val pages = listOf(
-            Triple("Equalizer", "10 bands") { a.open(EqualizerPage(a)) },
-            Triple("Effects", "Width, leveller") { a.open(EffectsPage(a)) },
-            Triple("Apps", "Per-app") { a.open(AppsPage(a)) })
-        for ((i, pg) in pages.withIndex()) {
-            if (i > 0) nav.addView(View(a).apply { setBackgroundColor(p.div) }, lp(a.dp(1), MATCH))
-            val c = a.column(2)
-            c.setPadding(a.dp(16), a.dp(13), a.dp(12), a.dp(13))
-            c.background = touch(p, null, 0f)
-            c.addView(a.text(pg.first, 15f, p.fg))
-            c.addView(a.text(pg.second, 12f, p.fg2))
-            c.setOnClickListener { pg.third() }
-            nav.addView(c, lp(0, WRAP, 1f))
+            val nav = a.card(26f)
+            val pages = listOf(
+                Triple("Equalizer", "10 bands") { a.open(EqualizerPage(a)) },
+                Triple("Effects", "Width, leveller and more") { a.open(EffectsPage(a)) },
+                Triple("Apps", "A profile for each app") { a.open(AppsPage(a)) })
+            for ((i, pg) in pages.withIndex()) {
+                if (i > 0) nav.addView(View(a).apply { setBackgroundColor(p.div) },
+                    lp(MATCH, a.dp(1)).apply { marginStart = a.dp(18); marginEnd = a.dp(18) })
+                val r = a.row(12)
+                r.setPadding(a.dp(18), a.dp(14), a.dp(16), a.dp(14))
+                r.background = touch(p, null, 0f)
+                val tx = a.column(2)
+                tx.addView(a.text(pg.first, 15f, p.fg, 500))
+                tx.addView(a.text(pg.second, 12f, p.fg2))
+                r.addView(tx, lp(0, WRAP, 1f))
+                r.addView(PathIcon(a, "M9 6l6 6-6 6", p.fg2, 18, 2f))
+                r.setOnClickListener { pg.third() }
+                nav.addView(r, lp())
+            }
+            nav.clipToOutline = true
+            addView(nav)
+
+            addView(a.resetButton("Every Dolby setting, preset and per-app choice goes back to how Mira ships it.") {
+                Dolby.resetAll()
+            }, lp().apply { topMargin = a.dp(8) })
         }
-        addView(nav)
 
-        addView(a.resetButton("Every Dolby setting, preset and per-app choice goes back to how Mira ships it.") {
-            Dolby.resetAll()
-        }, lp().apply { topMargin = a.dp(8) })
-    })
+        pager.add(a.scroller(sound))
+        pager.add(a.scroller(tuning))
+        sound.setPadding(a.dp(16), a.dp(4), a.dp(16), a.dp(28))
+        tuning.setPadding(a.dp(16), a.dp(4), a.dp(16), a.dp(28))
+        pager.onPage = { bindTabs() }
+        addView(pager, lp(MATCH, 0, 1f))
+    }
+
+    private fun bindTabs() {
+        tabs.forEachIndexed { i, t ->
+            val on = i == pager.index
+            t.background = rounded(if (on) p.sel else 0, a.dp(18f))
+            t.setTextColor(if (on) p.fg else p.fg2)
+        }
+    }
 
     override fun bind() {
         val hp = a.viewHeadphones
@@ -184,10 +233,11 @@ class HomePage(a: MainActivity) : Page(a) {
         }
         badge.values = Dolby.tune().eq
         outputs.forEachIndexed { i, b ->
-            val on = (i == 1) == hp
+            val on = (i % 2 == 1) == hp
             b.background = rounded(if (on) p.sel else 0, a.dp(18f))
             b.setTextColor(if (on) p.fg else p.fg2)
         }
+        bindTabs()
         for ((k, v) in cards) {
             val on = k == Dolby.kind
             v.first.background = touch(p, rounded(if (on) p.accSoft else p.card, a.dp(20f),
@@ -198,7 +248,8 @@ class HomePage(a: MainActivity) : Page(a) {
         }
         val t = Dolby.tune(); val b = Dolby.baseline()
         surround.bind(t.width / 100f, level(t.width, WIDTH), t.width != b.width)
-        dialogue.bind(t.dialogueAmount / 100f, if (t.dialogue) level(t.dialogueAmount, AMOUNT) else "Off",
+        dialogue.bind(if (t.dialogue) t.dialogueAmount / 100f else 0f,
+            if (t.dialogue) level(t.dialogueAmount, AMOUNT) else "Off",
             t.dialogueAmount != b.dialogueAmount || t.dialogue != b.dialogue)
         bass.bind(tone(t.bass), Tune.dbText(t.bass), t.bass != b.bass)
     }
@@ -222,11 +273,31 @@ class PresetsPage(a: MainActivity) : Page(a) {
         list.removeAllViews()
         val builtin = all.filter { !it.user }
         val mine = all.filter { it.user }
+        list.addView(noneCard())
         builtin.forEach { list.addView(card(it)) }
         if (mine.isNotEmpty()) {
             list.addView(a.label("My presets"))
             mine.forEach { list.addView(card(it)) }
         }
+    }
+
+    private fun noneCard(): View {
+        val on = Dolby.activePreset == null
+        val c = a.row(10)
+        c.setPadding(a.dp(16), a.dp(16), a.dp(16), a.dp(16))
+        c.background = touch(p, rounded(if (on) p.accSoft else p.card, a.dp(24f),
+            if (on) p.acc else 0, if (on) a.dp(2) else 0), a.dp(24f))
+        val names = a.column(2)
+        names.addView(a.text("None", 16f, p.fg, 600))
+        names.addView(a.text("No preset: the profile plays with its own sound", 12f, p.fg2))
+        c.addView(names, lp(0, WRAP, 1f))
+        val check = FrameLayout(a)
+        check.background = rounded(if (on) p.acc else 0, a.dp(13f), if (on) p.acc else p.ringOff, a.dp(2))
+        if (on) check.addView(PathIcon(a, "M5 12l5 5 9-10", 0xFFFFFFFF.toInt(), 14, 3f),
+            FrameLayout.LayoutParams(WRAP, WRAP, Gravity.CENTER))
+        c.addView(check, lp(a.dp(26), a.dp(26)))
+        c.setOnClickListener { Dolby.clearPreset() }
+        return c
     }
 
     private fun card(pr: Preset): View {

@@ -1,0 +1,13 @@
+diff --git a/android/config.go b/android/config.go
+index 4f1b36534..4a19c4cde 100644
+--- a/android/config.go
++++ b/android/config.go
+@@ -1525,7 +1525,7 @@ func (c *config) BuildKeys() string {
+ 	if defaultCert == "" || defaultCert == filepath.Join(testKeyDir, "testkey") {
+ 		return "test-keys"
+ 	}
+-	return "dev-keys"
++	return "release-keys"
+ }
+ 
+ func (c *config) ApexKeyDir(ctx ModuleContext) SourcePath {

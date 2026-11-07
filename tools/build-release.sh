@@ -37,12 +37,18 @@ step() { echo; echo "== $*" | tee -a "${LOG}"; }
 run() { "$@" >> "${LOG}" 2>&1 || { echo "FAILED: $* (last lines of ${LOG}):"; tail -40 "${LOG}"; exit 1; }; }
 
 [ -f vendor/miraclo-keys/releasekey.x509.pem ] || { echo "MIRACLO keys missing (vendor/miraclo-keys)"; exit 1; }
-[ -f device/xiaomi/marble/aurora/boot.img ] || { echo "aurora kernel missing: run use-aurora.sh first"; exit 1; }
+DEVICE="${DEVICE:-marble}"
+DEVICE_DIR="${DEVICE_DIR:-$(ls -d device/*/"${DEVICE}" 2>/dev/null | head -1)}"
+[ -n "${DEVICE_DIR}" ] || { echo "No device tree for ${DEVICE} under device/"; exit 1; }
+if [ "${DEVICE}" = marble ]; then DEVICE_NAME="${DEVICE_NAME:-POCO F5}"; else DEVICE_NAME="${DEVICE_NAME:-${DEVICE}}"; fi
+if [ "${DEVICE}" = marble ]; then
+    [ -f "${DEVICE_DIR}/aurora/boot.img" ] || { echo "aurora kernel missing: run use-aurora.sh first"; exit 1; }
+fi
 
 step "1/6 Environment and host tools"
 set +u
 source build/envsetup.sh > /dev/null
-lunch miraclo_marble-cp2a-userdebug > /dev/null
+lunch miraclo_${DEVICE}-cp2a-userdebug > /dev/null
 set -u
 run m ota_extractor fsck.erofs aapt2 simg2img
 
@@ -50,17 +56,17 @@ if [ -z "${RESUME:-}" ]; then
 step "2/6 Stock firmware and vendor images"
 LOCAL_ZIP="$(ls "$HOME"/stock/marble_global-ota_full-*.zip 2>/dev/null | head -1 || true)"
 export STOCK_LOCAL_ZIP="${LOCAL_ZIP}"
-run device/xiaomi/marble/fetch-stock.sh
+run ${DEVICE_DIR}/fetch-stock.sh
 run vendor/miraclo/perf/setup-perf-libs.sh
 run vendor/miraclo/apps/fetch-apps.sh
-ls device/xiaomi/marble/stock/firmware/*.img | xargs -n1 basename | tr '\n' ' ' | sed 's/^/   firmware: /'; echo
+ls ${DEVICE_DIR}/stock/firmware/*.img | xargs -n1 basename | tr '\n' ' ' | sed 's/^/   firmware: /'; echo
 
 # Qualcomm performance libraries: installed where this framework looks for them.
-PERF_MK=device/xiaomi/marble/stock/perf.mk
-PERF_BP=device/xiaomi/marble/stock/Android.bp
+PERF_MK=${DEVICE_DIR}/stock/perf.mk
+PERF_BP=${DEVICE_DIR}/stock/Android.bp
 : > "${PERF_MK}"; rm -f "${PERF_BP}"
 for jar in QPerformance UxPerformance; do
-    src="device/xiaomi/marble/stock/system_ext/framework/${jar}.jar"
+    src="${DEVICE_DIR}/stock/system_ext/framework/${jar}.jar"
     [ -f "${src}" ] || { echo "   ${jar}: not in this firmware"; continue; }
     want="$(grep -rhoE "\"/[a-z_]+/framework/${jar}\.jar\"" frameworks/base/core/java 2>/dev/null | head -1 | tr -d '"' || true)"
     part="system_ext"; [ "${want#/system/}" != "${want}" ] && part="system"
@@ -92,7 +98,7 @@ if [ -f "${STAMP}" ] && [ "$(cat "${STAMP}")" != "${VARIANT}" ]; then run m inst
 run m
 echo "${VARIANT}" > "${STAMP}"
 step "4b/6 Preflight checks (stops here if the build would not boot cleanly)"
-if ! python3 ~/preflight.py out/target/product/marble --expect \
+if ! python3 ~/preflight.py out/target/product/${DEVICE} --expect \
         "system_ext/lib64/libimsmedia_jni.so" \
         "system_ext/lib64/libimscamera_jni.so" \
         $([ "${VARIANT}" = gapps ] && echo "product/etc/permissions/privapp-permissions-miraclo-gapps.xml::com.android.deskclock") \
@@ -109,10 +115,10 @@ step "5/6 Update package (OTA)"
 if [ -n "${SKIP_OTA:-}" ]; then echo "   skipped (SKIP_OTA)"; else run bash ~/ota-step.sh; fi
 
 step "6/6 Packaging the release"
-O=out/target/product/marble
+O=out/target/product/${DEVICE}
 VER="$(grep -m1 '^ro.miraclo.version=' ${O}/system/build.prop ${O}/system_ext/etc/build.prop 2>/dev/null | head -1 | cut -d= -f2 || true)"
 [ -n "${VER}" ] || VER="1.0"
-NAME="MIRACLO-${VER}-Aurora-marble-${LABEL}-$(date +%Y%m%d)-userdebug"
+NAME="MIRACLO-${VER}-Aurora-${DEVICE}-${LABEL}-$(date +%Y%m%d)-userdebug"
 R=~/release/${NAME}
 rm -rf "${R}"; mkdir -p "${R}/images" "${R}/firmware"
 
@@ -134,20 +140,20 @@ for p in $(grep '_partition_list=' "${SD}" | cut -d= -f2); do
 done
 run python3 build/make/tools/releasetools/build_super_image.py "${SD}" "${R}/images/super.img"
 rm -f "${SD}"
-cp device/xiaomi/marble/stock/firmware/*.img "${R}/firmware/"
+ls ${DEVICE_DIR}/stock/firmware/*.img >/dev/null 2>&1 && cp ${DEVICE_DIR}/stock/firmware/*.img "${R}/firmware/"
 OTA="$(ls -t ${O}/*-ota*.zip 2>/dev/null | grep -v target_files | head -1 || true)"
 [ -n "${OTA}" ] && cp "${OTA}" "${R}/${NAME}-ota.zip"
 
 FW="$(cd "${R}/firmware" && ls *.img | sed 's/\.img$//' | tr '\n' ' ')"
 cat > "${R}/flash_all.sh" <<EOF
 #!/bin/bash
-# MIRACLO for the POCO F5 (marble). Flash from a computer (Linux or macOS) with the phone in
+# MIRACLO for the ${DEVICE_NAME} (${DEVICE}). Flash from a computer (Linux or macOS) with the phone in
 # fastboot mode (Power + Volume down), bootloader unlocked. Keeps your data unless you choose
 # to wipe it (needed the first time, coming from another ROM).
 set -e
 cd "\$(dirname "\$0")"
 FB=\${FASTBOOT:-\$(command -v fastboot || echo ~/platform-tools/fastboot)}
-\$FB getvar product 2>&1 | grep -q marble || { echo "This is not a POCO F5 (marble). Stopping."; exit 1; }
+\$FB getvar product 2>&1 | grep -q ${DEVICE} || { echo "This is not a ${DEVICE_NAME} (${DEVICE}). Stopping."; exit 1; }
 read -p "Wipe all data too? Needed the first time (y/N): " w
 echo "Firmware..."
 for p in ${FW}; do for s in a b; do \$FB flash \${p}_\$s firmware/\$p.img; done; done
@@ -168,10 +174,10 @@ chmod +x "${R}/flash_keep_firmware.sh"
 
 {
     echo "@echo off"
-    echo "rem MIRACLO for the POCO F5 (marble). Phone in fastboot mode, bootloader unlocked."
+    echo "rem MIRACLO for the ${DEVICE_NAME} (${DEVICE}). Phone in fastboot mode, bootloader unlocked."
     echo "cd /d %~dp0"
     echo "set FB=fastboot"
-    echo "%FB% getvar product 2>&1 | findstr /c:\"marble\" >nul || (echo This is not a POCO F5 ^(marble^). & pause & exit /b 1)"
+    echo "%FB% getvar product 2>&1 | findstr /c:\"${DEVICE}\" >nul || (echo This is not a ${DEVICE_NAME} ^(${DEVICE}^). & pause & exit /b 1)"
     echo "set /p W=Wipe all data too? Needed the first time (y/N): "
     echo "echo Firmware..."
     for p in ${FW}; do for s in a b; do echo "%FB% flash ${p}_${s} firmware\\${p}.img || goto :fail"; done; done
@@ -194,11 +200,11 @@ chmod +x "${R}/flash_keep_firmware.sh"
 FP="$(grep -m1 '^ro.system.build.fingerprint=' ${O}/system/build.prop | cut -d= -f2 || true)"
 SPL="$(grep -m1 '^ro.build.version.security_patch=' ${O}/system/build.prop | cut -d= -f2 || true)"
 cat > "${R}/README.txt" <<EOF
-MIRACLO ${VER} Aurora for the POCO F5 (marble), ${LABEL}
+MIRACLO ${VER} Aurora for the ${DEVICE_NAME} (${DEVICE}), ${LABEL}
 Build: userdebug, signed with MIRACLO keys. $(date -u +"%Y-%m-%d %H:%M UTC")
 Fingerprint: ${FP}
 Android security patch: ${SPL}
-Firmware: Xiaomi $(cat device/xiaomi/marble/stock/VERSION) (bootloader, modem, DSP and all other firmware included)
+Firmware: Xiaomi $(cat ${DEVICE_DIR}/stock/VERSION) (bootloader, modem, DSP and all other firmware included)
 
 Install (computer, fastboot):  flash_all.sh (Linux/macOS) or flash_all.bat (Windows)
   - flash_keep_firmware.sh: the same, but keeps the firmware already on the phone.

@@ -351,7 +351,7 @@ class SliderRow(c: Context, p: Palette, title: String, sub: String? = null) : Li
         names.addView(c.text(title, 15f, p.fg))
         if (sub != null) names.addView(c.text(sub, 12f, p.fg2))
         top.addView(names, lp(0, WRAP, 1f))
-        top.addView(valueText, lp(WRAP, WRAP).apply { marginEnd = dp(4) })
+        top.addView(valueText, lp(WRAP, WRAP).apply { marginEnd = dp(14) })
         top.addView(reset)
         top.minimumHeight = dp(30)
         addView(top, lp())

@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: MIRACLO
+# SPDX-License-Identifier: Apache-2.0
+#
+# MIRACLO product file for <device>. Copy to device/<brand>/<device>/miraclo_<device>.mk,
+# replace the <...> values, and list it in AndroidProducts.mk.
+
+# Your device
+$(call inherit-product, device/<brand>/<device>/device.mk)
+
+# MIRACLO
+$(call inherit-product, vendor/miraclo/config/common.mk)
+
+PRODUCT_NAME := miraclo_<device>
+PRODUCT_DEVICE := <device>
+PRODUCT_BRAND := <Brand>
+PRODUCT_MODEL := <Marketing name>
+PRODUCT_MANUFACTURER := <Manufacturer>

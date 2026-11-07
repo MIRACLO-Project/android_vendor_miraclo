@@ -13,3 +13,7 @@ Product configuration shared by every MIRACLO device.
 
 MIRACLO is built on Qualcomm CLO (`LA.QSSI.17.0`). See `PORTING.md` (coming)
 for bringing up a new device.
+
+## Other devices
+
+See [DEVICES.md](DEVICES.md) to build MIRACLO for your device.
