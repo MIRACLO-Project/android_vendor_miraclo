@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Cromite is the default browser.
+runtime_resource_overlay {
+    name: "MiraBrowserDefaultOverlay",
+    product_specific: true,
+}

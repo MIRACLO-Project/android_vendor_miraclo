@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Fossify Phone and Messages are the default phone and SMS apps (Vanilla).
+runtime_resource_overlay {
+    name: "MiraVanillaRolesOverlay",
+    product_specific: true,
+}

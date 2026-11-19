@@ -1,0 +1,8 @@
+// SPDX-FileCopyrightText: MIRACLO
+// SPDX-License-Identifier: Apache-2.0
+
+// Makes Mira Sans the system theme font (Settings, System UI and apps using the device theme).
+runtime_resource_overlay {
+    name: "MiraSansOverlay",
+    product_specific: true,
+}

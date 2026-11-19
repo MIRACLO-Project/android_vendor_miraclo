@@ -1,0 +1,8 @@
+{
+    "default": {
+        "SDCLANG": false,
+        "FORCE_SDCLANG_OFF": true,
+        "SDCLANG_PATH": "prebuilts/clang/host/linux-x86",
+        "SDCLANG_FLAGS": ""
+    }
+}

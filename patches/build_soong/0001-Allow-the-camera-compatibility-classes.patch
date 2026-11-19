@@ -1,0 +1,16 @@
+diff --git a/scripts/check_boot_jars/package_allowed_list.txt b/scripts/check_boot_jars/package_allowed_list.txt
+index d977db449..1e3ff3bfd 100644
+--- a/scripts/check_boot_jars/package_allowed_list.txt
++++ b/scripts/check_boot_jars/package_allowed_list.txt
+@@ -219,3 +219,11 @@ com\.google\.wear\..*
+ # Packages used for display offload in Wear OS
+ vendor\.google_clockwork\.displayoffload3
+ vendor\.google_clockwork\.displayoffload3\..*
++
++###################################################
++# MiraCLO: stand-ins for the MIUI classes the stock Xiaomi camera calls
++miui\.hardware\.display
++miui\.security
++miui\.securityspace
++miui\.util
++com\.qualcomm\.qti

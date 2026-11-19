@@ -1,0 +1,150 @@
+diff --git a/scripts/check_boot_jars/package_allowed_list.txt b/scripts/check_boot_jars/package_allowed_list.txt
+index d977db449..5273f736a 100644
+--- a/scripts/check_boot_jars/package_allowed_list.txt
++++ b/scripts/check_boot_jars/package_allowed_list.txt
+@@ -219,3 +219,10 @@ com\.google\.wear\..*
+ # Packages used for display offload in Wear OS
+ vendor\.google_clockwork\.displayoffload3
+ vendor\.google_clockwork\.displayoffload3\..*
++
++###################################################
++# MiraCLO: stand-ins for the MIUI classes the stock Xiaomi camera calls
++miui\.hardware\.display
++miui\.security
++miui\.securityspace
++miui\.util
+diff --git a/ui/build/config.go b/ui/build/config.go
+index 1d4488640..972c698d1 100644
+--- a/ui/build/config.go
++++ b/ui/build/config.go
+@@ -386,6 +386,27 @@ func newConfig(ctx Context, isDumpVar bool, args ...string) Config {
+ 
+ 	// Make sure OUT_DIR is set appropriately
+ 	if outDir, ok := ret.environ.Get("OUT_DIR"); ok {
++		/* SRA rbe out_dir begin */
++		outDir = filepath.Clean(outDir)
++		if filepath.IsAbs(outDir) {
++			top := os.Getenv("TOP")
++			if top == "" {
++				if wd, err := os.Getwd(); err == nil {
++					top = wd
++				}
++			}
++			if top != "" {
++				if rel, err := filepath.Rel(top, outDir); err == nil && !strings.HasPrefix(rel, "..") {
++					outDir = rel
++					if out, ok := ret.environ.Get("OUT"); ok && filepath.IsAbs(out) {
++						if relOut, err := filepath.Rel(top, out); err == nil && !strings.HasPrefix(relOut, "..") {
++							ret.environ.Set("OUT", relOut)
++						}
++					}
++				}
++			}
++		}
++		/* SRA rbe out_dir end */
+ 		ret.environ.Set("OUT_DIR", filepath.Clean(outDir))
+ 	} else {
+ 		outDir := "out"
+@@ -2056,7 +2077,13 @@ func (c *configImpl) KatiBin() string {
+ 	return c.PrebuiltBuildTool(binName)
+ }
+ 
+-func (c *configImpl) NinjaBin() string {
++func (c *configImpl) NinjaBin() string {/* SRA custom ninja begin */
++	if customNinja, ok := c.environ.Get("CUSTOM_NINJA_BIN"); ok && customNinja != "" {
++		return customNinja
++	} else if !ok {
++		return "/opt/ninja"
++	}
++/* SRA custom ninja end */
+ 	binName := "ninja"
+ 	if c.UseABFS() {
+ 		binName = "ninjago"
+diff --git a/ui/build/rbe.go b/ui/build/rbe.go
+index b3d95c453..45c247763 100644
+--- a/ui/build/rbe.go
++++ b/ui/build/rbe.go
+@@ -20,6 +20,7 @@ import (
+ 	"math"
+ 	"os"
+ 	"path/filepath"
++	"syscall"
+ 	"runtime"
+ 	"strconv"
+ 	"strings"
+@@ -109,10 +110,24 @@ func checkRBERequirements(ctx Context, config Config) {
+ 	}
+ 
+ 	if u := ulimitOrFatal(ctx, config, "-u"); u < rbeLeastNProcs {
+-		ctx.Fatalf("max user processes is insufficient: %d; want >= %d.\n", u, rbeLeastNProcs)
++		/* SRA rbe begin */ ctx.Println(fmt.Sprintf("\033[33mWARNING: max user processes is %d; recommended >= %d for RBE.\033[0m", u, rbeLeastNProcs)) /* SRA rbe end */
+ 	}
+ 	if n := ulimitOrFatal(ctx, config, "-n"); n < rbeLeastNFiles {
+-		ctx.Fatalf("max open files is insufficient: %d; want >= %d.\n", n, rbeLeastNFiles)
++		/* SRA rbe begin */
++		var limits syscall.Rlimit
++		if err := syscall.Getrlimit(syscall.RLIMIT_NOFILE, &limits); err == nil {
++			if limits.Cur < uint64(rbeLeastNFiles) {
++				limits.Cur = uint64(rbeLeastNFiles)
++				if limits.Cur > limits.Max {
++					limits.Cur = limits.Max
++				}
++				_ = syscall.Setrlimit(syscall.RLIMIT_NOFILE, &limits)
++			}
++		}
++		if n2 := ulimitOrFatal(ctx, config, "-n"); n2 < rbeLeastNFiles {
++			ctx.Println(fmt.Sprintf("\033[33mWARNING: max open files is %d; recommended >= %d for RBE.\033[0m", n2, rbeLeastNFiles))
++		}
++		/* SRA rbe end */
+ 	}
+ 	if _, err := os.Stat(config.rbeProxyLogsDir()); os.IsNotExist(err) {
+ 		if err := os.MkdirAll(config.rbeProxyLogsDir(), 0744); err != nil {
+@@ -256,7 +271,7 @@ func startRBEproxy(ctx Context, config Config) {
+ 	e := ctx.BeginTrace(metrics.RunSetupTool, "rbe_bootstrap")
+ 	defer e.End()
+ 
+-	ctx.Status.Status("Starting rbe...")
++	ctx.Status.Status("Starting ninja...")
+ 	executable := config.SisoBin()
+ 	args := []string{
+ 		"proxy",
+@@ -330,7 +345,7 @@ func startReproxy(ctx Context, config Config) {
+ 	e := ctx.BeginTrace(metrics.RunSetupTool, "rbe_bootstrap")
+ 	defer e.End()
+ 
+-	ctx.Status.Status("Starting rbe...")
++	ctx.Status.Status("Starting ninja...")
+ 	cmd := Command(ctx, config, e, "startReproxy bootstrap", rbeCommand(ctx, config, bootstrapCmd))
+ 
+ 	if output, err := cmd.CombinedOutput(); err != nil {
+@@ -347,7 +362,7 @@ func stopRBE(ctx Context, config Config) {
+ 		cmd := Command(ctx, config, nil, "stopRBE bootstrap", rbeCommand(ctx, config, bootstrapCmd), "-shutdown")
+ 		output, err = cmd.CombinedOutput()
+ 		if err != nil {
+-			ctx.Fatalf("rbe bootstrap with shutdown failed with: %v\n%s\n", err, output)
++			ctx.Fatalf("soong bootstrap with shutdown failed with: %v\n%s\n", err, output)
+ 		}
+ 	}
+ 
+@@ -420,12 +435,15 @@ func DumpRBEMetrics(ctx Context, config Config, filename string) {
+ // setting output directory to a path other than "out" in an RBE enabled
+ // build can cause slow builds.
+ func PrintOutDirWarning(ctx Context, config Config) {
+-	if config.UseRBE() && config.OutDir() != defaultOutDir {
+-		fmt.Fprintln(ctx.Writer, "")
+-		fmt.Fprintln(ctx.Writer, "\033[33mWARNING:\033[0m")
+-		fmt.Fprintln(ctx.Writer, fmt.Sprintf("Setting OUT_DIR to a path other than %v may result in slow RBE builds.", defaultOutDir))
+-		fmt.Fprintln(ctx.Writer, "See http://go/android_rbe_out_dir for a workaround.")
+-		fmt.Fprintln(ctx.Writer, "")
++	if config.UseRBE() {
++		outDir := filepath.Clean(config.OutDir())
++		if outDir != defaultOutDir && outDir != "." && filepath.Base(outDir) != defaultOutDir {
++			fmt.Fprintln(ctx.Writer, "")
++			fmt.Fprintln(ctx.Writer, "\033[33mWARNING:\033[0m")
++			fmt.Fprintln(ctx.Writer, fmt.Sprintf("Setting OUT_DIR to a path other than %v may result in slow RBE builds.", defaultOutDir))
++			fmt.Fprintln(ctx.Writer, "See http://go/android_rbe_out_dir for a workaround.")
++			fmt.Fprintln(ctx.Writer, "")
++		}
+ 	}
+ }
+ 
