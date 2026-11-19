@@ -4,15 +4,23 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- Shown under "MIRACLO" in Wallpaper & style. Each entry has a "_small" thumbnail. -->
+    <!-- Shown under "MIRACLO" in Wallpaper & style. Each entry has a "_small" thumbnail.
+         Midnight, Obsidian and Eclipse are true black for AMOLED screens. -->
     <string-array name="partner_wallpapers" translatable="false">
-        <item>miraclo_orbit</item>
-        <item>miraclo_deep</item>
-        <item>miraclo_signal</item>
-        <item>miraclo_twilight</item>
-        <item>miraclo_cloud</item>
-        <item>miraclo_halo</item>
-        <item>miraclo_ice</item>
-        <item>miraclo_daybreak</item>
+        <item>miraclo_aurora_dark</item>
+        <item>miraclo_aurora_light</item>
+        <item>miraclo_lagoon_dark</item>
+        <item>miraclo_lagoon_light</item>
+        <item>miraclo_ember_dark</item>
+        <item>miraclo_ember_light</item>
+        <item>miraclo_bloom_dark</item>
+        <item>miraclo_bloom_light</item>
+        <item>miraclo_glacier_dark</item>
+        <item>miraclo_glacier_light</item>
+        <item>miraclo_nebula_dark</item>
+        <item>miraclo_nebula_light</item>
+        <item>miraclo_midnight</item>
+        <item>miraclo_obsidian</item>
+        <item>miraclo_eclipse</item>
     </string-array>
 </resources>
