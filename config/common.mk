@@ -51,9 +51,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/miraclo/bootanimation/bootanimation-orbit.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 
-# Mira Sans (Inter, SIL Open Font License 1.1): the system theme font.
+# Mira Sans (Inter 4.1, SIL Open Font License 1.1): the system font, used everywhere, with
+# optical sizes like iOS's SF (text below 20 pt, display from 20 pt).
 PRODUCT_COPY_FILES += \
-    vendor/miraclo/fonts/MiraSans-Variable.ttf:$(TARGET_COPY_OUT_PRODUCT)/fonts/MiraSans-Variable.ttf \
+    vendor/miraclo/fonts/MiraSans-Regular.ttf:$(TARGET_COPY_OUT_PRODUCT)/fonts/MiraSans-Regular.ttf \
+    vendor/miraclo/fonts/MiraSans-Italic.ttf:$(TARGET_COPY_OUT_PRODUCT)/fonts/MiraSans-Italic.ttf \
     vendor/miraclo/fonts/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
 PRODUCT_PACKAGES += \
     MiraSansOverlay

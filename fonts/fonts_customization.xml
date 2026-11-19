@@ -1,64 +1,1320 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-FileCopyrightText: MIRACLO
      SPDX-License-Identifier: Apache-2.0
-     Mira Sans (Inter, SIL Open Font License 1.1) as named families for the system theme. -->
+
+     Mira Sans everywhere: the default system font, the theme fonts, the Material type
+     scale used by Settings and System UI, and the Google Sans names some system apps ask
+     for. Mira Sans is Inter 4.1 (SIL Open Font License 1.1), renamed by build-mira-sans.py.
+
+     Each role uses the matching optical size of the font: the Text cut (opsz 14) for
+     reading sizes, moving towards the Display cut (opsz 32) as text gets larger, which
+     tightens spacing and refines detail in titles and headlines. -->
 <fonts-modification version="1">
-    <family customizationType="new-named-family" name="mira-sans">
-        <font weight="100" style="normal">MiraSans-Variable.ttf
+
+    <!-- Default font for the whole system and every app that does not bring its own. -->
+    <family customizationType="new-named-family" name="sans-serif">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="200" style="normal">MiraSans-Variable.ttf
+        <font weight="200" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="300" style="normal">MiraSans-Variable.ttf
+        <font weight="300" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="400" style="normal">MiraSans-Variable.ttf
+        <font weight="400" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="500" style="normal">MiraSans-Variable.ttf
+        <font weight="500" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="600" style="normal">MiraSans-Variable.ttf
+        <font weight="600" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="700" style="normal">MiraSans-Variable.ttf
+        <font weight="700" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="800" style="normal">MiraSans-Variable.ttf
+        <font weight="800" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="900" style="normal">MiraSans-Variable.ttf
+        <font weight="900" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
     </family>
-    <family customizationType="new-named-family" name="mira-sans-medium">
-        <font weight="100" style="normal">MiraSans-Variable.ttf
-            <axis tag="wght" stylevalue="500" />
+
+    <!-- Theme body font (config_bodyFontFamily). -->
+    <family customizationType="new-named-family" name="mira-sans">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="200" style="normal">MiraSans-Variable.ttf
-            <axis tag="wght" stylevalue="500" />
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="300" style="normal">MiraSans-Variable.ttf
-            <axis tag="wght" stylevalue="500" />
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="400" style="normal">MiraSans-Variable.ttf
-            <axis tag="wght" stylevalue="500" />
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="500" style="normal">MiraSans-Variable.ttf
+        <font weight="500" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="600" style="normal">MiraSans-Variable.ttf
+        <font weight="600" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="700" style="normal">MiraSans-Variable.ttf
+        <font weight="700" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="800" style="normal">MiraSans-Variable.ttf
+        <font weight="800" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
-        <font weight="900" style="normal">MiraSans-Variable.ttf
+        <font weight="900" style="normal">MiraSans-Regular.ttf
             <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+
+    <!-- Theme body font, medium (config_bodyFontFamilyMedium). -->
+    <family customizationType="new-named-family" name="mira-sans-medium">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+
+    <!-- Theme headline font (config_headlineFontFamily). -->
+    <family customizationType="new-named-family" name="mira-sans-headline">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+    </family>
+
+    <!-- Theme headline font, medium (config_headlineFontFamilyMedium). -->
+    <family customizationType="new-named-family" name="mira-sans-headline-medium">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="20" />
+        </font>
+    </family>
+
+    <!-- Settings list titles: a touch heavier than the descriptions under them. -->
+    <family customizationType="new-named-family" name="mira-sans-title">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="540" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="540" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="540" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="540" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="540" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+    </family>
+
+    <!-- Google Sans names requested by Settings, System UI and Google apps. -->
+    <family customizationType="new-named-family" name="google-sans">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+    </family>
+
+    <family customizationType="new-named-family" name="google-sans-medium">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+    </family>
+
+    <family customizationType="new-named-family" name="google-sans-bold">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="18" />
+        </font>
+    </family>
+
+    <family customizationType="new-named-family" name="google-sans-text">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="100" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="200" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+
+    <family customizationType="new-named-family" name="google-sans-text-medium">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+
+    <family customizationType="new-named-family" name="google-sans-text-bold">
+        <font weight="100" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="100" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="200" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="300" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="400" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="500" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="600" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="italic">MiraSans-Italic.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+
+    <!-- Material type scale (Settings, System UI and Compose system apps). -->
+    <family customizationType="new-named-family" name="variable-display-large">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-medium">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-small">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-large">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-medium">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-small">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-large">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-medium">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-small">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-large">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-medium">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-small">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-large">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-medium">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-small">
+        <font weight="400" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="400" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="700" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="700" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-large-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-medium-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-small-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-display-small-emphasized-light">
+        <font weight="300" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="300" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-large-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="32" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-medium-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="28" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-headline-small-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="24" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-large-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="22" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-medium-emphasized">
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-title-small-emphasized">
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-large-emphasized">
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-medium-emphasized">
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-label-small-emphasized">
+        <font weight="600" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="600" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="900" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-large-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="16" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-medium-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+    </family>
+    <family customizationType="new-named-family" name="variable-body-small-emphasized">
+        <font weight="500" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="500" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="800" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="800" />
+            <axis tag="opsz" stylevalue="14" />
+        </font>
+        <font weight="1000" style="normal">MiraSans-Regular.ttf
+            <axis tag="wght" stylevalue="900" />
+            <axis tag="opsz" stylevalue="14" />
         </font>
     </family>
 </fonts-modification>
