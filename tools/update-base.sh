@@ -24,10 +24,12 @@ W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
 
 echo "== CLO release manifest $TAG"
-git clone -q --depth 1 --branch release "$CLO/la/system/manifest" "$W/m" 2>/dev/null \
-  || git clone -q --depth 1 "$CLO/la/system/manifest" "$W/m"
+git clone -q --depth 1 --branch "$TAG" "$CLO/la/system/manifest" "$W/m" 2>/dev/null \
+  || git clone -q --depth 1 --branch release "$CLO/la/system/manifest" "$W/m"
 NEW="$W/m/$TAG.xml"
-[ -f "$NEW" ] || { echo "STOPPED: $TAG.xml is not in the CLO manifest repository."; ls "$W/m" | grep -i qssi | tail -5; exit 1; }
+[ -f "$NEW" ] || NEW="$W/m/default.xml"
+[ -f "$NEW" ] || { echo "STOPPED: no manifest for $TAG in the CLO manifest repository."; ls "$W/m"; exit 1; }
+echo "   $(basename "$NEW")"
 
 echo "== MIRACLO manifest: clo/system.xml -> $TAG"
 M=.repo/manifests
