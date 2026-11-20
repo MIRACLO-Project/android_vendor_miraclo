@@ -60,6 +60,8 @@ done
 step "5/7 Google apps"
 if grep -q "com.google.android.gmssystem" vendor/miraclo/gapps/mtg/mtg.mk 2>/dev/null; then echo "   already prepared"
 else
+  [ -n "$PIXEL" ] || PIXEL=$(ls -t ~/gapps-cache/panther-*.zip ~/panther-*.zip ~/stock/panther-*.zip ~/aurora/panther-*.zip 2>/dev/null | head -1 || true)
+  [ -n "$PIXEL" ] && echo "   Pixel image: $PIXEL"
   [ -n "$PIXEL" ] || stop "the Google apps are not prepared yet: run again with the Pixel 7 factory image URL."
   bash vendor/miraclo/gapps/prepare-gapps.sh "$PIXEL"
 fi
