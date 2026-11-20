@@ -33,10 +33,13 @@ for p in vendor/miraclo/patches/*/*.patch; do
   else stop "$p does not apply to $d"; fi
 done
 
-step "3/7 Host tools"
+step "3/7 Bundled apps and host tools"
+bash vendor/miraclo/apps/fetch-apps.sh   # the product config needs the bundled apps
+unset TARGET_PRODUCT TARGET_BUILD_VARIANT TARGET_RELEASE TARGET_BUILD_TYPE
 set +eu; source build/envsetup.sh >/dev/null; export WITH_GMS=true
-lunch miraclo_${DEVICE}-cp2a-userdebug || stop "lunch failed"
+lunch miraclo_${DEVICE}-cp2a-userdebug
 set -e
+[ "$TARGET_PRODUCT" = "miraclo_${DEVICE}" ] || stop "lunch did not select miraclo_${DEVICE} (got: ${TARGET_PRODUCT:-nothing})"
 m ota_extractor fsck.erofs aapt2 simg2img
 
 step "4/7 Stock firmware, vendor images and performance libraries"
@@ -45,7 +48,6 @@ export STOCK_LOCAL_ZIP="$(ls ~/stock/marble_global-ota_full-*.zip 2>/dev/null | 
 echo "   from $STOCK_LOCAL_ZIP (skips itself when already extracted)"
 bash "$D/fetch-stock.sh"
 bash vendor/miraclo/perf/setup-perf-libs.sh
-bash vendor/miraclo/apps/fetch-apps.sh
 PERF_MK=$D/stock/perf.mk; PERF_BP=$D/stock/Android.bp
 : > "$PERF_MK"; rm -f "$PERF_BP"
 for jar in QPerformance UxPerformance; do
