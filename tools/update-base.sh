@@ -76,7 +76,7 @@ while read -r path name oldrev newrev; do
   remote=$(git remote | grep -E '^(mira|miraclo)$' | tail -1)
   [ -n "$remote" ] || remote=$(git remote | head -1)
   echo "-- $path"
-  git fetch -q --depth=1 "$remote" aurora && git checkout -q -B aurora FETCH_HEAD
+  git fetch -q "$remote" aurora && git checkout -q -B aurora FETCH_HEAD
   if ! git fetch -q --depth=1 "$CLO/$name" "$oldrev" "$newrev" 2>/dev/null; then
     echo "   could not download CLO $name"; FAILED+=("$path (download)"); continue
   fi
