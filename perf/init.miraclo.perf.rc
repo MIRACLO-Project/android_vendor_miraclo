@@ -31,5 +31,23 @@ on property:sys.boot_completed=1
     write /sys/block/sdc/queue/rq_affinity 2
     write /sys/block/dm-0/queue/iostats 0
 
-    # Less time spent on kernel performance sampling.
+    # Less time spent on kernel performance sampling and bookkeeping.
     write /proc/sys/kernel/perf_cpu_time_max_percent 5
+    write /proc/sys/kernel/sched_schedstats 0
+    write /proc/sys/vm/stat_interval 10
+
+    # Memory: no watermark boosting after fragmentation events (it makes kswapd reclaim in
+    # bursts that show up as stutter), and compaction only when it is really needed.
+    write /proc/sys/vm/watermark_boost_factor 0
+    write /proc/sys/vm/compaction_proactiveness 0
+    write /proc/sys/vm/extfrag_threshold 750
+
+    # Storage: modest read-ahead for UFS (apps read small, scattered files).
+    write /sys/block/sda/queue/read_ahead_kb 128
+    write /sys/block/sdc/queue/read_ahead_kb 128
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+
+    # Network: fair queueing for smoother downloads alongside calls and games.
+    write /proc/sys/net/core/default_qdisc fq_codel
+    write /proc/sys/net/ipv4/tcp_fastopen 3
+    write /proc/sys/net/ipv4/tcp_slow_start_after_idle 0

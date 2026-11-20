@@ -59,9 +59,9 @@ if grep -q drm_atomic_check_valid_clones common/drivers/gpu/drm/drm_atomic_helpe
   echo "STOPPED: the clone check is still in drm_atomic_helper.c"; exit 1
 fi
 
-echo "== Build (Google's GKI config, ThinLTO)"
+echo "== Build (Google's GKI config, full LTO: whole-kernel optimisation, same symbols for the drivers)"
 rm -rf out
-LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 SKIP_MRPROPER=1 build/build.sh > "$OUT/build.log" 2>&1 \
+LTO=${LTO:-full} BUILD_CONFIG=common/build.config.gki.aarch64 SKIP_MRPROPER=1 build/build.sh > "$OUT/build.log" 2>&1 \
   || { tail -30 "$OUT/build.log"; echo "Build failed. Log: $OUT/build.log"; exit 1; }
 DIST=$(ls -d out/*/dist | head -1)
 strings "$DIST/Image" | grep -m1 "Linux version"
