@@ -17,6 +17,7 @@ PIXEL="${1:-}"
 exec > >(tee ~/miraclo-build.log) 2>&1
 step() { echo; echo "=== $* ($(date +%H:%M))"; }
 stop() { echo; echo "STOPPED: $*"; exit 1; }
+trap 'echo; echo "FAILED at line $LINENO: the error is just above (full log: ~/miraclo-build.log)"' ERR
 
 step "1/7 Signing keys"
 [ -f vendor/miraclo-keys/releasekey.x509.pem ] && [ -f vendor/miraclo-keys/platform.x509.pem ] \
@@ -33,25 +34,27 @@ for p in vendor/miraclo/patches/*/*.patch; do
 done
 
 step "3/7 Host tools"
-set +u; source build/envsetup.sh >/dev/null; export WITH_GMS=true
-lunch miraclo_${DEVICE}-cp2a-userdebug
+set +eu; source build/envsetup.sh >/dev/null; export WITH_GMS=true
+lunch miraclo_${DEVICE}-cp2a-userdebug || stop "lunch failed"
+set -e
 m ota_extractor fsck.erofs aapt2 simg2img
 
 step "4/7 Stock firmware, vendor images and performance libraries"
-if [ -f "$D/stock/vendor.img" ] && [ -f "$D/stock/boot.img" ]; then echo "   already extracted"
-else
-  export STOCK_LOCAL_ZIP="$(ls ~/stock/marble_global-ota_full-*.zip 2>/dev/null | head -1)"
-  [ -n "$STOCK_LOCAL_ZIP" ] || stop "no HyperOS update zip in ~/stock"
-  echo "   from $STOCK_LOCAL_ZIP"
-  bash "$D/fetch-stock.sh"
-fi
+export STOCK_LOCAL_ZIP="$(ls ~/stock/marble_global-ota_full-*.zip 2>/dev/null | head -1)"
+[ -n "$STOCK_LOCAL_ZIP" ] || stop "no HyperOS update zip in ~/stock"
+echo "   from $STOCK_LOCAL_ZIP (skips itself when already extracted)"
+bash "$D/fetch-stock.sh"
 bash vendor/miraclo/perf/setup-perf-libs.sh
+bash vendor/miraclo/apps/fetch-apps.sh
 PERF_MK=$D/stock/perf.mk; PERF_BP=$D/stock/Android.bp
 : > "$PERF_MK"; rm -f "$PERF_BP"
 for jar in QPerformance UxPerformance; do
   [ -f "$D/stock/system_ext/framework/$jar.jar" ] || continue
-  printf 'dex_import {\n    name: "%s",\n    jars: ["system_ext/framework/%s.jar"],\n    system_ext_specific: true,\n}\n' "$jar" "$jar" >> "$PERF_BP"
-  echo "PRODUCT_PACKAGES += $jar" >> "$PERF_MK"; echo "   $jar"
+  want=$(grep -rhoE "\"/[a-z_]+/framework/$jar\.jar\"" frameworks/base/core/java 2>/dev/null | head -1 | tr -d '"' || true)
+  part=system_ext; [ "${want#/system/}" != "$want" ] && part=system
+  { echo "dex_import {"; echo "    name: \"$jar\","; echo "    jars: [\"system_ext/framework/$jar.jar\"],"
+    [ $part = system_ext ] && echo "    system_ext_specific: true,"; echo "}"; } >> "$PERF_BP"
+  echo "PRODUCT_PACKAGES += $jar" >> "$PERF_MK"; echo "   $jar -> /$part/framework"
 done
 
 step "5/7 Google apps"
@@ -66,6 +69,15 @@ step "6/7 Build (userdebug, GApps, release keys) - the long part"
 [ "$(cat out/.miraclo-variant 2>/dev/null)" = vanilla ] && m installclean
 m
 echo gapps > out/.miraclo-variant
+echo; echo "--- preflight (stops here if the build would not boot cleanly)"
+python3 vendor/miraclo/tools/preflight.py $O --expect \
+  "system_ext/lib64/libimsmedia_jni.so" "system_ext/lib64/libimscamera_jni.so" \
+  "product/etc/permissions/privapp-permissions-miraclo-gapps.xml::com.android.deskclock" \
+  "system/app/webview/webview.apk|product/app/webview/webview.apk|system_ext/app/webview/webview.apk" \
+  "system/build.prop::persist.sys.disable_rescue=true" \
+  "system_ext/priv-app/MiuiCamera/MiuiCamera.apk" \
+  "system_ext/etc/permissions/privapp-permissions-miuicamera.xml::com.android.camera" \
+  "system_ext/lib64/libcamera_algoup_jni.xiaomi.so" || stop "preflight failed, nothing was packaged"
 
 step "7/7 Update zip, signed with the release key"
 if ! m otapackage; then
