@@ -77,3 +77,9 @@ eval python3 "$T/system/tools/mkbootimg/mkbootimg.py" $(sed "s|$W/boot/kernel|$O
 cp "$DIST/Image" "$DIST/vmlinux.symvers" "$OUT/"
 sha256sum "$OUT/boot-aurora-test.img" | tee "$OUT/boot-aurora-test.img.sha256"
 echo "Done. Test image: $OUT/boot-aurora-test.img"
+# The build uses device/xiaomi/marble/aurora/boot.img when it is there.
+if [ -d "$T/device/xiaomi/marble" ] && [ "${INSTALL:-0}" = 1 ]; then
+  mkdir -p "$T/device/xiaomi/marble/aurora"
+  cp "$OUT/boot-aurora-test.img" "$T/device/xiaomi/marble/aurora/boot.img"
+  echo "Installed as device/xiaomi/marble/aurora/boot.img"
+fi
