@@ -43,6 +43,7 @@ set +eu; source build/envsetup.sh >/dev/null; export WITH_GMS=true
 lunch miraclo_${DEVICE}-cp2a-userdebug
 set -e
 [ "$TARGET_PRODUCT" = "miraclo_${DEVICE}" ] || stop "lunch did not select miraclo_${DEVICE} (got: ${TARGET_PRODUCT:-nothing})"
+export USE_RBE=false   # again, in case envsetup turned it on
 # The device tree points at stock files that are extracted only in step 4, with these
 # very tools, so the tools are built with the missing stock files allowed.
 ALLOW_MISSING_DEPENDENCIES=true m ota_extractor fsck.erofs aapt2 simg2img
