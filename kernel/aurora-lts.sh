@@ -9,23 +9,30 @@
 # every stock Xiaomi driver (vendor_boot and vendor_dlkm) will load on it. The first test image
 # stays where it is; this one goes to ~/aurora-kernel/miraclo-out/lts/.
 set -e
-K=~/aurora-kernel
+K=${K:-~/aurora-kernel}
 H=$(cd "$(dirname "$0")" && pwd)
 OUT=$K/miraclo-out/lts
-T=~/aurora
+T=${T:-$(pwd)}
+STOCK=${STOCK:-~/stock/fw}
 mkdir -p "$OUT"
 W=$(mktemp -d)
 trap 'rm -rf "$W"' EXIT
 
 echo "== Stock Xiaomi drivers (from ~/stock/fw, read only)"
-python3 "$T/system/tools/mkbootimg/unpack_bootimg.py" --boot_img ~/stock/fw/vendor_boot.img --out "$W/vb" >/dev/null
+python3 "$T/system/tools/mkbootimg/unpack_bootimg.py" --boot_img $STOCK/vendor_boot.img --out "$W/vb" >/dev/null
 mkdir -p "$W/mods/vendor_boot" "$W/mods/vendor_dlkm"
 for r in "$W"/vb/vendor_ramdisk*; do
   ( cd "$W/mods/vendor_boot" && (lz4 -dc "$r" 2>/dev/null || gzip -dc "$r" 2>/dev/null || cat "$r") | cpio -idm --quiet 2>/dev/null ) || true
 done
-fsck.erofs --extract="$W/mods/vendor_dlkm" ~/stock/fw/vendor_dlkm.img >/dev/null
+fsck.erofs --extract="$W/mods/vendor_dlkm" $STOCK/vendor_dlkm.img >/dev/null
 echo "   $(find "$W/mods" -name '*.ko' | wc -l) module files"
 
+if [ ! -d "$K/.repo" ]; then
+  echo "== Kernel source (first run): Google's android12-5.10-lts manifest"
+  mkdir -p "$K" && cd "$K"
+  repo init -q -u https://android.googlesource.com/kernel/manifest -b common-android12-5.10-lts --depth=1
+  repo sync -q -c -j8 --no-tags
+fi
 cd "$K"
 if ls out/*/dist/vmlinux.symvers >/dev/null 2>&1; then
   echo "== Check against the first test kernel (5.10.270, the one that booted)"
@@ -68,7 +75,7 @@ fi
 tail -1 "$OUT/check.txt"
 
 echo "== Test boot image (stock boot image, header v4, with this kernel)"
-python3 "$T/system/tools/mkbootimg/unpack_bootimg.py" --boot_img ~/stock/fw/boot.img --out "$W/boot" --format=mkbootimg > "$W/args"
+python3 "$T/system/tools/mkbootimg/unpack_bootimg.py" --boot_img $STOCK/boot.img --out "$W/boot" --format=mkbootimg > "$W/args"
 if file "$W/boot/kernel" | grep -qi gzip; then gzip -9c "$DIST/Image" > "$OUT/Image.aurora"
 elif file "$W/boot/kernel" | grep -qi lz4; then lz4 -l -12 -f "$DIST/Image" "$OUT/Image.aurora" >/dev/null
 else cp "$DIST/Image" "$OUT/Image.aurora"; fi
