@@ -35,8 +35,9 @@ echo "   $FROM -> $TO"
 
 echo "== MIRACLO manifest: clo/system.xml -> $TO"
 M=.repo/manifests
-( cd "$M" && git fetch -q origin aurora && git checkout -q -B aurora origin/aurora )
-python3 - "$NEW" "$M/clo/system.xml" <<'PY'
+# Work on a separate copy, so repo's own checkout of the manifest is never touched.
+git clone -q --depth 1 --branch aurora "$(git -C "$M" remote get-url origin)" "$W/mf"
+python3 - "$NEW" "$W/mf/clo/system.xml" <<'PY'
 import sys, xml.etree.ElementTree as ET
 root = ET.parse(sys.argv[1]).getroot()
 res = ET.Element("manifest")
@@ -47,7 +48,7 @@ ET.indent(res, space="    ")
 ET.ElementTree(res).write(sys.argv[2], encoding="UTF-8", xml_declaration=True)
 print("   %d projects" % len(res))
 PY
-( cd "$M"
+( cd "$W/mf"
   if git diff --quiet; then echo "   already on $TO"
   else git commit -qam "clo: $TO" && git push -q origin HEAD:aurora && echo "   pushed"; fi )
 
