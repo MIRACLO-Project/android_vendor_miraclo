@@ -37,12 +37,15 @@ step "3/7 Bundled apps and host tools"
 bash vendor/miraclo/apps/fetch-apps.sh   # the product config needs the bundled apps
 unset TARGET_PRODUCT TARGET_BUILD_VARIANT TARGET_RELEASE TARGET_BUILD_TYPE
 # Remote build execution needs Google's build service; build everything on this server.
-[ -n "${RBE_service:-}" ] || export USE_RBE=false
+unset $(env | grep -oE '^RBE_[A-Za-z_]+' ) 2>/dev/null || true
+export USE_RBE=false
 set +eu; source build/envsetup.sh >/dev/null; export WITH_GMS=true
 lunch miraclo_${DEVICE}-cp2a-userdebug
 set -e
 [ "$TARGET_PRODUCT" = "miraclo_${DEVICE}" ] || stop "lunch did not select miraclo_${DEVICE} (got: ${TARGET_PRODUCT:-nothing})"
-m ota_extractor fsck.erofs aapt2 simg2img
+# The device tree points at stock files that are extracted only in step 4, with these
+# very tools, so the tools are built with the missing stock files allowed.
+ALLOW_MISSING_DEPENDENCIES=true m ota_extractor fsck.erofs aapt2 simg2img
 
 step "4/7 Stock firmware, vendor images and performance libraries"
 export STOCK_LOCAL_ZIP="$(ls ~/stock/marble_global-ota_full-*.zip 2>/dev/null | head -1)"
