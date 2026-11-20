@@ -36,6 +36,8 @@ done
 step "3/7 Bundled apps and host tools"
 bash vendor/miraclo/apps/fetch-apps.sh   # the product config needs the bundled apps
 unset TARGET_PRODUCT TARGET_BUILD_VARIANT TARGET_RELEASE TARGET_BUILD_TYPE
+# Remote build execution needs Google's build service; build everything on this server.
+[ -n "${RBE_service:-}" ] || export USE_RBE=false
 set +eu; source build/envsetup.sh >/dev/null; export WITH_GMS=true
 lunch miraclo_${DEVICE}-cp2a-userdebug
 set -e
