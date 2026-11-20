@@ -77,7 +77,7 @@ grep -q "com.google.android.gmssystem" vendor/miraclo/gapps/mtg/mtg.mk || stop "
 
 step "6/7 Build (userdebug, GApps, release keys) - the long part"
 [ "$(cat out/.miraclo-variant 2>/dev/null)" = vanilla ] && m installclean
-m
+m -k   # keep going: every module that fails reports its errors in the same run || { grep -nE "^e: |(^|[ :])error:|: error " ~/miraclo-build.log | grep -v "warning:" | cut -c1-300 > ~/errors.txt; echo; echo "Build errors: $(wc -l < ~/errors.txt) lines in ~/errors.txt"; stop "the build has errors (all of them are in ~/errors.txt)"; }
 echo gapps > out/.miraclo-variant
 echo; echo "--- preflight (stops here if the build would not boot cleanly)"
 python3 vendor/miraclo/tools/preflight.py $O --expect \
